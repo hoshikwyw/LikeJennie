@@ -30,3 +30,31 @@ const settings = {
     distortionSensitivity: 0.15,
     distortionSmoothing: 0.075,
 }
+
+const slideWidth = 3.0
+const slideHeight = 1.5
+const gap = 0.1
+const slideCount = 10
+const imagesCount = 5
+const totalWidth = slideCount * (slideWidth + gap)
+const slideUnit = slideWidth + gap
+
+const slides = []
+let currentPosition = 0
+let targetPosition = 0
+let isScrolling = false
+let autoScrollSpeed = 0
+let lastTime = 0
+let touchStartX = 0
+let touchLastX = 0
+let prevPosition = 0
+
+let currentDistortionFactor = 0
+let targetDistortionFactor = 0
+let peakVelocity = 0
+let velocityHistory = [0, 0, 0, 0, 0]
+
+const correctImageColor = (texture) => {
+    texture.colorSpace = THREE.SRGBColorSpace
+    return texture
+}
