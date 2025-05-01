@@ -108,7 +108,7 @@ const createSlide = (index) => {
     };
 
     const imageIndex = (index % imagesCount) + 1;
-    const imagePath = `images/img${imageIndex}.jpg`;
+    const imagePath = `public/images/img${imageIndex}.jpg`;
 
     new THREE.TextureLoader().load(
         imagePath,
