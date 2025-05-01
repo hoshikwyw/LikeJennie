@@ -1,4 +1,4 @@
-import * as THREE from "./node_modules/three/build/three.module.js";
+import * as THREE from "three";
 
 const canvas = document.getElementById("canvas");
 const renderer = new THREE.WebGLRenderer({
@@ -122,8 +122,8 @@ const updateCurve = (mesh, worldPositionX, distortionFactor) => {
     const originalVertices = mesh.userData.originalVertices;
 
     for (let i = 0; i < positionAttribute.count; i++) {
-        const x = originalVertices(i * 3);
-        const y = originalVertices(i * 3 + 1);
+        const x = originalVertices[i * 3];
+        const y = originalVertices[i * 3 + 1];
 
         const vertexWorldPosX = worldPositionX + x;
         const distFromCenter = Math.sqrt(
