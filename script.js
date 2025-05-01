@@ -10,13 +10,14 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xe3e3db);
+scene.background = new THREE.Color(0x000000);
 const camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
     0.1,
     100
 );
+
 camera.position.z = 5;
 
 const settings = {
@@ -53,6 +54,37 @@ let currentDistortionFactor = 0;
 let targetDistortionFactor = 0;
 let peakVelocity = 0;
 let velocityHistory = [0, 0, 0, 0, 0];
+
+// / Create a 2D canvas for the background text
+const backgroundCanvas = document.createElement("canvas");
+backgroundCanvas.width = window.innerWidth;
+backgroundCanvas.height = window.innerHeight;
+const bgContext = backgroundCanvas.getContext("2d");
+
+// Set background color and text properties
+bgContext.fillStyle = "#000000"; // Background color
+bgContext.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+
+bgContext.fillStyle = "#ff0000"; // Text color
+bgContext.font = "bold 100px Arial";
+bgContext.textAlign = "center";
+bgContext.textBaseline = "middle";
+bgContext.fillText("Like Jennie", backgroundCanvas.width / 2, backgroundCanvas.height / 2);
+
+// Create a texture from the 2D canvas
+const backgroundTexture = new THREE.CanvasTexture(backgroundCanvas);
+
+// Create a plane geometry for the background
+const backgroundGeometry = new THREE.PlaneGeometry(totalWidth, slideHeight * 3);
+const backgroundMaterial = new THREE.MeshBasicMaterial({
+    map: backgroundTexture,
+    side: THREE.DoubleSide,
+});
+const backgroundMesh = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
+
+// Position the background plane behind the slides
+backgroundMesh.position.z = -0.1; // Slightly behind the slides
+scene.add(backgroundMesh);
 
 const correctImageColor = (texture) => {
     texture.colorSpace = THREE.SRGBColorSpace;

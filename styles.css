@@ -7,8 +7,8 @@
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  background-color: #e3e3db;
-  color: #0f0f0f;
+    background-color: #000000;
+    color: #ff0000;
 }
 
 p {
@@ -17,6 +17,7 @@ p {
   font-weight: 600;
   letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
+  color: #ff0000;
 }
 
 nav,
@@ -28,6 +29,8 @@ footer {
   justify-content: space-between;
   align-items: center;
   z-index: 2;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ff0000;
 }
 
 nav {
@@ -39,8 +42,11 @@ footer {
 }
 
 canvas {
+  position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
+    background-color: #000000;
+    z-index: 1;
 }
